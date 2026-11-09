@@ -1,0 +1,8 @@
+{
+  "name": "avatar-battle-film",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Aang vs Korra - phim 3D chay trong trinh duyet (three.js + Web Audio), xuat ra 1 file HTML",
+  "scripts": { "build": "node build.mjs" },
+  "dependencies": { "three": "0.160.0" }
+}

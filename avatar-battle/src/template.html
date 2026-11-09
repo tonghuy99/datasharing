@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0b0d1c">
+<title>Aang vs Korra</title>
+<style>
+:root{--bg:#07080f;--ink:#f4efe6;--dim:#b9b3c9;--gold:#f2c36b;--air:#ffd27a;--water:#6cc4ff;--earth:#8fd08a;--fire:#ff7a45}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);overflow:hidden;overscroll-behavior:none;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  -webkit-user-select:none;user-select:none;touch-action:manipulation}
+#stage{position:fixed;left:0;top:0;overflow:visible}
+#c{display:block;width:100%;height:100%}
+#flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+#cap{position:absolute;left:0;right:0;bottom:calc(14px + env(safe-area-inset-bottom));text-align:center;padding:0 16px;
+  font-size:clamp(13px,2.3vw,22px);line-height:1.35;text-shadow:0 1px 3px #000,0 0 14px #000;opacity:0;transition:opacity .35s;pointer-events:none}
+#cap b{color:var(--gold);letter-spacing:.06em}
+body.portrait #cap{bottom:auto;top:calc(100% + 14px);font-size:15px}
+#title{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;pointer-events:none;text-align:center}
+#title h1{margin:0;font-size:clamp(34px,9vw,110px);font-weight:800;letter-spacing:.08em;text-shadow:0 4px 30px #000}
+#title h1 span{color:var(--gold);font-weight:300;margin:0 .25em}
+#title p{margin:.6em 0 0;color:var(--dim);letter-spacing:.3em;font-size:clamp(11px,1.8vw,18px);text-transform:uppercase}
+#hud{position:absolute;right:calc(10px + env(safe-area-inset-right));top:calc(10px + env(safe-area-inset-top));display:flex;gap:8px;opacity:.75}
+#hud button{width:40px;height:40px;border-radius:50%;border:1px solid #fff3;background:#0008;color:#fff;font-size:18px;padding:0}
+#prog{position:absolute;left:0;right:0;bottom:0;height:3px;background:#fff1}
+#prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--air),var(--water),var(--earth),var(--fire))}
+.ov{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  padding:calc(20px + env(safe-area-inset-top)) 22px calc(20px + env(safe-area-inset-bottom));overflow:auto}
+#start{background:radial-gradient(ellipse at 50% 40%,#0b0d1caa,#07080fee 70%)}
+#start h1{margin:0 0 .2em;font-size:clamp(34px,9vw,84px);letter-spacing:.08em}
+#start h1 span{color:var(--gold);font-weight:300;margin:0 .2em}
+#start .sub{color:var(--dim);letter-spacing:.22em;text-transform:uppercase;font-size:12px;margin-bottom:28px}
+.btn{font:inherit;font-weight:700;font-size:19px;color:#1a1206;background:linear-gradient(180deg,#ffd98a,#f0a93c);border:0;border-radius:999px;
+  padding:16px 34px;min-height:56px;box-shadow:0 8px 30px #f0a93c55;cursor:pointer}
+.btn:active{transform:scale(.97)}
+.tips{margin-top:22px;color:var(--dim);font-size:14px;line-height:1.7}
+.els{display:flex;gap:14px;justify-content:center;margin:0 0 26px;font-size:13px;letter-spacing:.12em}
+.els i{font-style:normal;padding:4px 10px;border-radius:999px;border:1px solid currentColor}
+#end{background:#07080fd9;display:none;opacity:0;transition:opacity 1.2s}
+#end h2{font-size:clamp(30px,7vw,64px);letter-spacing:.3em;margin:0 0 14px;color:var(--gold);font-weight:300}
+#end table{border-collapse:collapse;margin:0 auto 18px;font-size:13.5px;line-height:1.5;text-align:left;max-width:560px}
+#end td{padding:3px 8px;vertical-align:top;color:var(--dim)}
+#end td:first-child{white-space:nowrap;font-weight:700}
+#end small{display:block;color:#8d88a0;max-width:560px;margin:16px auto 0;line-height:1.5;font-size:11.5px}
+</style>
+</head>
+<body>
+<div id="stage">
+  <canvas id="c"></canvas>
+  <div id="title"><h1>AANG<span>vs</span>KORRA</h1><p>Hai thế hệ Avatar · Một trận đấu</p></div>
+  <div id="flash"></div>
+  <div id="cap"></div>
+  <div id="hud" hidden><button id="mute" aria-label="Bật/tắt tiếng">🔊</button><button id="re" aria-label="Chiếu lại">↺</button></div>
+  <div id="prog"><i></i></div>
+</div>
+
+<div id="start" class="ov">
+  <h1>AANG<span>vs</span>KORRA</h1>
+  <div class="sub">Phim ngắn 3D · 84 giây</div>
+  <div class="els"><i style="color:var(--air)">KHÍ</i><i style="color:var(--water)">THỦY</i><i style="color:var(--earth)">THỔ</i><i style="color:var(--fire)">HỎA</i></div>
+  <button id="go" class="btn">▶&nbsp; Chạm để chiếu phim</button>
+  <div class="tips">🔊 Có âm thanh — hãy tăng âm lượng<br>📱 iPhone: xoay ngang để xem toàn màn hình</div>
+</div>
+
+<div id="end" class="ov">
+  <h2>HẾT</h2>
+  <table>
+    <tr><td style="color:var(--air)">KHÍ</td><td>Bát Quái Chưởng (Baguazhang) — bước vòng tròn, xoay người né đòn</td></tr>
+    <tr><td style="color:var(--water)">THỦY</td><td>Thái Cực Quyền (Tai Chi) — mềm mại, liên miên, dẫn lực</td></tr>
+    <tr><td style="color:var(--earth)">THỔ</td><td>Hồng Gia Quyền (Hung Gar) — tấn thấp vững, quyền mạnh</td></tr>
+    <tr><td style="color:var(--fire)">HỎA</td><td>Bắc Thiếu Lâm (Northern Shaolin) — đòn dài, đá cao, dồn dập</td></tr>
+  </table>
+  <button id="again" class="btn">↺&nbsp; Xem lại</button>
+  <small>Phim fan-made phi thương mại. Nhân vật Aang &amp; Korra thuộc bản quyền Nickelodeon / Viacom.
+  Mô hình 3D low-poly dựng thủ tục bằng three.js (MIT); nhạc &amp; hiệu ứng âm thanh tổng hợp trực tiếp bằng Web Audio.</small>
+</div>
+
+<script>/*__THREE__*/</script>
+<script>/*__FILM__*/</script>
+</body>
+</html>
